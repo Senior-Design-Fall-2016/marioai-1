@@ -1,0 +1,3 @@
+1. Download ANJI. Google ANJI Neat and it should come up.
+2. Then add ${Your ANJI home}/libs/anji.jar to the class path
+3. Google how to do that because I am not sure what IDE you are using or how to do that on a mac
