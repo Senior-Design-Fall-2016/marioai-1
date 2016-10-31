@@ -1,14 +1,18 @@
-package ch.idsia.agents;
+package ch.idsia.agents.learning;
 
-import ch.idsia.agents.learning.SimpleMLPAgent;
+import ch.idsia.agents.Agent;
+import ch.idsia.agents.BasicLearningAgent;
+import ch.idsia.agents.LearningAgent;
 import ch.idsia.benchmark.tasks.LearningTask;
-import org.jgap.Chromosome;
-import org.jgap.ChromosomeMaterial;
-import org.jgap.Configuration;
-import org.jgap.FitnessFunction;
-import org.jgap.Genotype;
+import com.anji.util.Properties;
+import org.jgap.*;
 import org.jgap.impl.DefaultConfiguration;
 import org.jgap.impl.IntegerAllele;
+
+import com.anji.neat.*;
+import com.anji.nn.*;
+
+import java.io.IOException;
 
 /**
  * Created by Andrew on 10/19/2016.
@@ -17,6 +21,8 @@ public class AnjiLearningAgent extends BasicLearningAgent implements LearningAge
 {
     Agent agent;
     Agent finalAgent;
+    Properties myProps;
+    Evolver anjiEvolver;
 
     public void learn() {
 
@@ -47,16 +53,13 @@ public class AnjiLearningAgent extends BasicLearningAgent implements LearningAge
         // Start with a DefaultConfiguration, which comes setup with the
         // most common settings.
         // -------------------------------------------------------------
-        Configuration conf = new DefaultConfiguration();
-
-        // Set the fitness function we want to use, which is our
-        // MinimizingMakeChangeFitnessFunction. We construct it with
-        // the target amount of change passed in to this method.
-        // ---------------------------------------------------------
-        FitnessFunction myFunc;
-
-        ChromosomeMaterial sample = new ChromosomeMaterial();
-        conf.setSampleChromosomeMaterial( sample );
+        try{
+            myProps = new Properties("mario.properties");
+            anjiEvolver = new Evolver();
+            anjiEvolver.init(myProps);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }

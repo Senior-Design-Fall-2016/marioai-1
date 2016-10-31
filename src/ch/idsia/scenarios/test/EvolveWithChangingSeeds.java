@@ -1,5 +1,8 @@
 package ch.idsia.scenarios.test;
 
+import ch.idsia.agents.Agent;
+import ch.idsia.agents.AgentsPool;
+import ch.idsia.agents.learning.SmallMLPAgent;
 import ch.idsia.benchmark.mario.engine.GlobalOptions;
 import ch.idsia.benchmark.tasks.MultiDifficultyProgressTask;
 import ch.idsia.evolution.Evolvable;
