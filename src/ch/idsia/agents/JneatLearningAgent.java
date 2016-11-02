@@ -81,6 +81,8 @@ public class JneatLearningAgent extends BasicLearningAgent implements LearningAg
     }
 
     public void init() {
+        System.out.println("This should print something");
+        Neat.initbase();
         neatPop = new Population(POPSIZE, NUMINPUTS ,NUMOUTPUTS, 10 /* max index of nodes */, true /* recurrent */, 0.5 /* probability of connecting two nodes */ );
     }
 
