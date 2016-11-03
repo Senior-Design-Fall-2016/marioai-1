@@ -4,10 +4,10 @@ import ch.idsia.agents.Agent;
 import ch.idsia.agents.controllers.BasicMarioAIAgent;
 import ch.idsia.benchmark.mario.environments.Environment;
 import ch.idsia.evolution.Evolvable;
-import jneat.Genome;
-import jneat.NNode;
-import jneat.Network;
-import jneat.Organism;
+import tk.mechtecs.jneat.jneat.*;
+import tk.mechtecs.jneat.jneatcommon.*;
+import tk.mechtecs.jneat.jgraph.*;
+import tk.mechtecs.jneat.gui.*;
 
 import java.util.Vector;
 

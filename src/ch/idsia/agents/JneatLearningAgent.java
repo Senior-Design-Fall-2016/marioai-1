@@ -6,7 +6,11 @@ import ch.idsia.agents.LearningAgent;
 import ch.idsia.agents.learning.NeatAgent;
 import ch.idsia.benchmark.mario.environments.Environment;
 import ch.idsia.benchmark.tasks.LearningTask;
-import jneat.*;
+import tk.mechtecs.jneat.jneat.*;
+import tk.mechtecs.jneat.jneatcommon.*;
+import tk.mechtecs.jneat.jgraph.*;
+import tk.mechtecs.jneat.gui.*;
+
 
 import java.util.Vector;
 
