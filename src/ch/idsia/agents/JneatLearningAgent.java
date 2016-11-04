@@ -46,6 +46,7 @@ public class JneatLearningAgent extends BasicLearningAgent implements LearningAg
                 agent = new NeatAgent(((Organism) neatOrgs.get(i)));
 
                 ((Organism) neatOrgs.get(i)).setFitness(agentLearningTask.evaluate(agent));
+                System.out.println("Organism " + i + ":" + ((Organism) neatOrgs.get(i)).getFitness());
             }
             neatPop.epoch((int)currentEvaluation++);
         }

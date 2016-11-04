@@ -14,7 +14,7 @@ public class EnvConstant {
 	public static String OS_VERSION = " ";
 
 	// current directory
-	public static String JNEAT_DIR = "\\tk\\mechtecs\\jneat\\gui";
+	public static String JNEAT_DIR = "\\C:\\Users\\Andrew\\Documents\\Senior_Design\\NeatO-Marioai\\src\\tk\\mechtecs\\jneat\\gui";
 
 	// current file name for parameter single without dir o other)
 	public static String NAME_PARAMETER = "parametri";

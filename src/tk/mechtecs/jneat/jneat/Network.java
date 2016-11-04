@@ -145,7 +145,7 @@ import tk.mechtecs.jneat.jneatcommon.NeatRoutine;
 			++abortcount;
 			if (abortcount >= 30) 
 			{
-			   System.out.print("\n *ERROR* Inputs disconnected from output!");
+//			   System.out.print("\n *ERROR* Inputs disconnected from output!");
 
 // 05.06.2002 commented 			   
 //			   genotype.op_view();
