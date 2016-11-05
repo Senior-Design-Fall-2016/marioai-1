@@ -90,10 +90,4 @@ public class JneatLearningAgent extends BasicLearningAgent implements LearningAg
         Neat.initbase();
         neatPop = new Population(POPSIZE, NUMINPUTS ,NUMOUTPUTS, 10 /* max index of nodes */, true /* recurrent */, 0.5 /* probability of connecting two nodes */ );
     }
-
-    private double probe(int x, int y, byte[][] scene) {
-        int realX = x + 11;
-        int realY = y + 11;
-        return (scene[realX][realY] != 0) ? 1 : 0;
-    }
 }

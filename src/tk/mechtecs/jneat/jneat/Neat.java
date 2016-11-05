@@ -189,7 +189,7 @@ import tk.mechtecs.jneat.jneatcommon.IOseq;
 		 p_mate_singlepoint_prob = 0;
 		 p_mate_only_prob = 0;
 		 p_recur_only_prob = 0;
-		 p_pop_size = 500;
+		 p_pop_size = 10;
 		 p_dropoff_age = 0;
 		 p_newlink_tries = 0;
 		 p_print_every = 0;
