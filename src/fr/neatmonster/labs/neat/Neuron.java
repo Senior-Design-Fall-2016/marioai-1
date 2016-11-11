@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Neuron {
     public static double sigmoid(final double x) {
-        return 2.0 / (1.0 + Math.exp(-4.9 * x)) - 1.0;
+        return 1.0 / (1.0 + Math.exp(-1 * x)) ;
     }
 
     public double              value  = 0.0;

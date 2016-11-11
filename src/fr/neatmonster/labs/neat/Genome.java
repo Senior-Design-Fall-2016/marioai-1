@@ -15,16 +15,13 @@ import static fr.neatmonster.labs.neat.Pool.PERTURBATION;
 import static fr.neatmonster.labs.neat.Pool.STEP_SIZE;
 import static fr.neatmonster.labs.neat.Pool.rnd;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 public class Genome {
+    public Random rand_generator = new Random();
     public final List<Synapse>  genes         = new ArrayList<Synapse>();
+    public boolean              bred          = true;
     public double               fitness       = 0.0;
     public int                  maxNeuron     = 0;
     public int                  globalRank    = 0;
@@ -143,13 +140,26 @@ public class Genome {
         while (prob > 0) {
             if (rnd.nextDouble() < prob)
                 mutateLink(true);
+            else{
+                //System.out.println("Remove Link");
+                int i = rand_generator.nextInt((genes.size()));
+                removeLink(i);
+            }
             --prob;
         }
 
         prob = mutationRates[3];
+        int i = rand_generator.nextInt((genes.size()));
         while (prob > 0) {
-            if (rnd.nextDouble() < prob)
+            if (rnd.nextDouble() < prob/3)
                 mutateNode();
+            else if(rnd.nextDouble() < 2*prob/3) {
+                //System.out.println("Remove Node");
+                removeNode(i);
+            }
+            else{
+                splitNode(i);
+            }
             --prob;
         }
 
@@ -200,7 +210,54 @@ public class Genome {
 
         genes.add(newLink);
     }
+    public void removeLink(int i){
+        if(network == null);
+        else{
+            if(!network.isEmpty()){
+                network.remove(i);
+            }
+        }
+    }
+    public void removeNode(int i){
+        // public final List<Synapse> genes = new ArrayList<Synapse>();
+        Synapse snap = genes.get(i);
+        genes.remove(i);
+        int input = snap.input;
+        int output = snap.output;
 
+        for(Synapse gene : genes){
+            if(gene.output == input){
+                gene.output = output;
+            }
+        }
+    }
+    public void splitNode(int i){
+        Synapse node1 = genes.get(i);
+        Synapse node2 = node1;
+
+        node1.innovation = ++Pool.innovation; node1.weight = 1.0;
+        node2.innovation = ++Pool.innovation; node2.weight = 1.0;
+
+
+        /*link adding
+        final int neuron1 = randomNeuron(false, true);
+        final int neuron2 = randomNeuron(true, false);
+
+        final Synapse newLink = new Synapse();
+        newLink.input = neuron1;
+        newLink.output = neuron2;
+
+        if (forceBias)
+            newLink.input = INPUTS - 1;
+
+        if (containsLink(newLink))
+            return;
+
+        newLink.innovation = ++Pool.innovation;
+        newLink.weight = rnd.nextDouble() * 4.0 - 2.0;
+
+        genes.add(newLink);*/
+    }
     public void mutateNode() {
         if (genes.isEmpty())
             return;
