@@ -48,7 +48,7 @@ import ch.idsia.tools.MarioAIOptions;
 
 public final class LearningTrack
 {
-final static long numberOfTrials = 1000;
+final static long numberOfTrials = 50;
 final static boolean scoring = false;
 private static int killsSum = 0;
 private static float marioStatusSum = 0;
@@ -167,35 +167,74 @@ public static void main(String[] args)
 //    LearningAgent learningAgent = new MLPESLearningAgent(); // Learning track competition entry goes here
     LearningAgent learningAgent = (LearningAgent) marioAIOptions.getAgent();
     System.out.println("main.learningAgent = " + learningAgent);
+    float finalScore = 0;
 
 //        Level 0
-//    marioAIOptions.setArgs("-lf on -lg on");
-    float finalScore = LearningTrack.evaluateSubmission(marioAIOptions, learningAgent);
+    // Flat level
+    marioAIOptions.setArgs("-mm 0 -lf on -lg on -vis off");
+    finalScore = LearningTrack.evaluateSubmission(marioAIOptions, learningAgent);
+
+    // Flat level with gap
+    marioAIOptions = new MarioAIOptions(args);
+    marioAIOptions.setAgent(learningAgent);
+    marioAIOptions.setArgs("-mm 0 -lg on -lhs off -lhb off -ltb off -le off -lb off -lco off -lca off -vis off");
+    finalScore += LearningTrack.evaluateSubmission(marioAIOptions, learningAgent);
+
+    // No gaps but one hill
+    marioAIOptions = new MarioAIOptions(args);
+    marioAIOptions.setAgent(learningAgent);
+    marioAIOptions.setArgs("-mm 0 -lg off -lhs on -lhb off -ltb off -le off -lb off -lco off -lca off -vis off");
+    finalScore += LearningTrack.evaluateSubmission(marioAIOptions, learningAgent);
+
+    // One gap and one hill
+    marioAIOptions = new MarioAIOptions(args);
+    marioAIOptions.setAgent(learningAgent);
+    marioAIOptions.setArgs("-mm 0 -lg on -lhs off -lhb on -ltb off -le off -lb off -lco off -lca off -vis off");
+    finalScore += LearningTrack.evaluateSubmission(marioAIOptions, learningAgent);
+
+    // Level with tube
+    marioAIOptions = new MarioAIOptions(args);
+    marioAIOptions.setAgent(learningAgent);
+    marioAIOptions.setArgs("-mm 0 -lg off -lhs off -lhb off -ltb on -le off -lb off -lco off -lca off -vis off");
+    finalScore += LearningTrack.evaluateSubmission(marioAIOptions, learningAgent);
+
+
+    // Flat level with enemy
+    marioAIOptions = new MarioAIOptions(args);
+    marioAIOptions.setAgent(learningAgent);
+    marioAIOptions.setArgs("-mm 0 -lg off -lhs off -lhb off -ltb off -le on -lb off -lco off -lca off -vis off");
+    finalScore += LearningTrack.evaluateSubmission(marioAIOptions, learningAgent);
+
+    // Level with cannon
+    marioAIOptions = new MarioAIOptions(args);
+    marioAIOptions.setAgent(learningAgent);
+    marioAIOptions.setArgs("-mm 0 -lg off -lhs off -lhb off -ltb off -le off -lb off -lco off -lca on -vis off");
+    finalScore += LearningTrack.evaluateSubmission(marioAIOptions, learningAgent);
 
 //        Level 1
     marioAIOptions = new MarioAIOptions(args);
     marioAIOptions.setAgent(learningAgent);
-    marioAIOptions.setArgs("-lco off -lb on -le off -lhb off -lg on -ltb on -lhs off -lca on -lde on -ld 5 -ls 133829");
+    marioAIOptions.setArgs("-mm 0 -lco off -lb on -le off -lhb off -lg on -ltb on -lhs off -lca on -lde on -ld 5 -ls 133829 -vis off");
     finalScore += LearningTrack.evaluateSubmission(marioAIOptions, learningAgent);
 
 //        Level 2
     marioAIOptions = new MarioAIOptions(args);
-    marioAIOptions.setArgs("-lde on -i on -ld 30 -ls 133434");
+    marioAIOptions.setArgs("-mm 0 -lde on -i on -ld 30 -ls 133434 -vis off");
     finalScore += LearningTrack.evaluateSubmission(marioAIOptions, learningAgent);
 
 //        Level 3
     marioAIOptions = new MarioAIOptions(args);
-    marioAIOptions.setArgs("-lde on -i on -ld 30 -ls 133434 -lhb on");
+    marioAIOptions.setArgs("-mm 0 -lde on -i on -ld 30 -ls 133434 -lhb on -vis off");
     finalScore += LearningTrack.evaluateSubmission(marioAIOptions, learningAgent);
 
 //        Level 4
     marioAIOptions = new MarioAIOptions(args);
-    marioAIOptions.setArgs("-lla on -le off -lhs on -lde on -ld 5 -ls 1332656");
+    marioAIOptions.setArgs("-mm 0 -lla on -le off -lhs on -lde on -ld 5 -ls 1332656 -vis off");
     finalScore += LearningTrack.evaluateSubmission(marioAIOptions, learningAgent);
 
     // Level 5 (bonus level)
     marioAIOptions = new MarioAIOptions(args);
-    marioAIOptions.setArgs("-le off -lhs on -lde on -ld 5 -ls 1332656");
+    marioAIOptions.setArgs("-mm 0 -le off -lhs on -lde on -ld 5 -ls 1332656 -vis off");
     finalScore += LearningTrack.evaluateSubmission(marioAIOptions, learningAgent);
 
     System.out.println("finalScore = " + finalScore);
